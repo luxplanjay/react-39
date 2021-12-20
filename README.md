@@ -1,70 +1,142 @@
-# Getting Started with Create React App
+# react-group-39
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- [react-icons](https://react-icons.github.io/react-icons/)
+- [date-fns](https://date-fns.org/)
+- [prop-types](https://www.npmjs.com/package/prop-types)
 
-## Available Scripts
+## Components
 
-In the project directory, you can run:
+### PageTitle
 
-### `npm start`
+```html
+<h1 class="title">Text</h1>
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```css
+.title {
+  margin-top: 0;
+  text-align: center;
+  text-transform: uppercase;
+}
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### EventBoard
 
-### `npm test`
+```html
+<div class="eventBoard">Event cards</div>
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```css
+.eventBoard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, auto));
+  gap: 24px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+```
 
-### `npm run build`
+### Event
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```html
+<div class="event">
+  <h2 class="title">{name}</h2>
+  <p class="info">
+    <i class="icon"></i>
+    Location
+  </p>
+  <p class="info">
+    <i class="icon"></i>
+    Speaker
+  </p>
+  <p class="info">
+    <i class="icon"></i>
+    Start Date
+  </p>
+  <p class="info">
+    <i class="icon"></i>
+    Duration
+  </p>
+  <span class="chip free|paid|vip">Event type</span>
+</div>
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Icons:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- FaMapMarkerAlt
+- FaUserAlt
+- FaCalendarAlt
+- FaClock
 
-### `npm run eject`
+```css
+.event {
+  position: relative;
+  border: 2px dashed black;
+  padding: 8px;
+  border-radius: 4px;
+}
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+.title {
+  margin-top: 0;
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+.info {
+  display: flex;
+  align-items: center;
+  margin-top: 0;
+  margin-bottom: 8px;
+  color: var(--color-primary-text);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  letter-spacing: 0.25px;
+}
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+.icon {
+  display: block;
+  margin-right: 8px;
+  color: var(--color-secondary-text);
+}
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+.chip {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  background-color: #000;
+  color: #fff;
+}
 
-## Learn More
+.free {
+  background-color: var(--color-green);
+}
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+.paid {
+  background-color: var(--color-blue);
+}
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+.vip {
+  background-color: var(--color-red);
+}
+```
 
-### Code Splitting
+## Utils
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```js
+import { format, formatDistanceStrict } from 'date-fns';
 
-### Analyzing the Bundle Size
+const formatEventStart = start => {
+  return format(Date.parse(start), 'dd MMMM yyyy, HH:mm');
+};
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+const formatEventDuration = (start, end) => {
+  return formatDistanceStrict(Date.parse(start), Date.parse(end));
+};
+```
