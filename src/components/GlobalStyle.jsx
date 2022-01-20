@@ -7,7 +7,6 @@ export const GlobalStyle = createGlobalStyle`
 
   html {
     scroll-behavior: smooth;
-
   }
 
   body {
