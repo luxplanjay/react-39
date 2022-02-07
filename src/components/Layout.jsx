@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import styled from 'styled-components';
 import { Outlet, NavLink } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
@@ -27,8 +28,12 @@ export const Layout = () => {
         <Link to="/preview">Preview</Link>
         <Link to="/list">List</Link>
         <Link to="/create">Create</Link>
+        <Link to="/page-a">Page A</Link>
+        <Link to="/page-b">Page B</Link>
       </Nav>
-      <Outlet />
+      <Suspense fallback="">
+        <Outlet />
+      </Suspense>
       <Toaster />
     </Wrapper>
   );

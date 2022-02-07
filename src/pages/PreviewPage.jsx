@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Controls } from 'components/Controls';
 import { Progress } from 'components/Progress';
+import { Loader } from 'components/Loader';
 import { Publication } from 'components/Publication';
 import { useFetchItems } from 'hooks';
 
@@ -29,7 +30,7 @@ export const PreviewPage = () => {
 
   return (
     <div>
-      {loading && <div>Загрузка...</div>}
+      {loading && <Loader />}
       {showPlaceholder && <div>Еще нет публикаций!</div>}
       {showReaderUI && (
         <>
