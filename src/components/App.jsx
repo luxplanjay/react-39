@@ -1,34 +1,22 @@
-import { lazy } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
-import { Layout } from 'components/Layout';
-import { PageA, PageB } from 'pages';
-
-// Если у вас именованные экспорты компонентов страниц
-const createChunk = componentName => {
-  return lazy(() =>
-    import(`../pages/${componentName}`).then(module => ({
-      default: module[componentName],
-    }))
-  );
-};
-
-const ListPage = createChunk('ListPage');
-const ItemPage = createChunk('ItemPage');
-const AddItemPage = createChunk('AddItemPage');
-const PreviewPage = createChunk('PreviewPage');
+import { useSelector, useDispatch } from 'react-redux';
+import { update, getClicksValue } from '../redux/clicksSlice';
 
 export const App = () => {
+  const dispatch = useDispatch();
+  const numberOfClicks = useSelector(getClicksValue);
+
   return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route path="page-a" element={<PageA />} />
-        <Route path="page-b" element={<PageB />} />
-        <Route path="preview" element={<PreviewPage />} />
-        <Route path="list" element={<ListPage />} />
-        <Route path="list/:itemId" element={<ItemPage />} />
-        <Route path="create" element={<AddItemPage />} />
-        <Route path="*" element={<Navigate to="/" />} />
-      </Route>
-    </Routes>
+    <>
+      <h1>Number of clicks: {numberOfClicks}</h1>
+      <button type="button" onClick={() => dispatch(update(5))}>
+        Add 5 clicks
+      </button>
+      <button type="button" onClick={() => dispatch(update(10))}>
+        Add 10 clicks
+      </button>
+      <button type="button" onClick={() => dispatch(update(20))}>
+        Add 20 clicks
+      </button>
+    </>
   );
 };
