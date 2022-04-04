@@ -3,31 +3,25 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.1",
-    "@testing-library/react": "^12.1.2",
+    "@testing-library/jest-dom": "^5.16.3",
+    "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
-    "axios": "^0.25.0",
-    "date-fns": "^2.27.0",
-    "formik": "^2.2.9",
-    "nanoid": "^3.1.30",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "modern-normalize": "^1.1.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
     "react-hot-toast": "^2.2.0",
     "react-icons": "^4.3.1",
-    "react-loader-spinner": "^5.0.10",
-    "react-player": "^2.9.0",
-    "react-router-dom": "^6.2.1",
+    "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.0",
-    "react-use": "^17.3.2",
-    "styled-components": "^5.3.3",
-    "web-vitals": "^2.1.2",
-    "yup": "^0.32.11"
+    "styled-components": "^5.3.5",
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "server": "json-server --delay 300 --port 4040 --watch db.json "
   },
   "eslintConfig": {
     "extends": [
@@ -48,6 +42,7 @@
     ]
   },
   "devDependencies": {
-    "prop-types": "^15.8.0"
+    "json-server": "^0.17.0",
+    "prop-types": "^15.8.1"
   }
 }
