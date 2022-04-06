@@ -1,20 +1,23 @@
-import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { useFetchAuthor } from 'hooks/useFetchAuthor';
 
-export const AuthorSubView = ({ authors }) => {
-  const { authorId } = useParams();
-  const author = authors.find(author => author.id === Number(authorId));
-
+export const AuthorSubView = () => {
+  const author = useFetchAuthor();
   return (
     <>
-      <h2>{author.name}</h2>
-      <ul>
-        {author.books.map(book => (
-          <li key={book.id}>
-            <Link to={`/books/${book.id}`}>{book.title}</Link>
-          </li>
-        ))}
-      </ul>
+      {!author && <h2>Загружаем...</h2>}
+      {author && (
+        <>
+          <h2>{author.name}</h2>
+          <ul>
+            {author.books.map(book => (
+              <li key={book.id}>
+                <Link to={`/books/${book.id}`}>{book.title}</Link>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
     </>
   );
 };

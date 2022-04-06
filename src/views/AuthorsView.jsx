@@ -1,11 +1,9 @@
 import { useState, useEffect } from 'react';
-import { NavLink, Route, useRouteMatch } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 import * as bookShelfAPI from '../services/bookshelf-api';
 import { PageHeading } from 'components/PageHeading/PageHeading';
-import { AuthorSubView } from './AuthorSubView';
 
 export const AuthorsView = () => {
-  const { url, path } = useRouteMatch();
   const [authors, setAuthors] = useState(null);
 
   useEffect(() => {
@@ -20,16 +18,13 @@ export const AuthorsView = () => {
         <ul>
           {authors.map(author => (
             <li key={author.id}>
-              <NavLink to={`${url}/${author.id}`}>{author.name}</NavLink>
+              <NavLink to={`${author.id}`}>{author.name}</NavLink>
             </li>
           ))}
         </ul>
       )}
       <hr />
-
-      <Route path={`${path}/:authorId`}>
-        {authors && <AuthorSubView authors={authors} />}
-      </Route>
+      <Outlet />
     </>
   );
 };
