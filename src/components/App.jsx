@@ -1,11 +1,13 @@
 import { Routes, Route } from 'react-router-dom';
 import { Layout } from 'components/Layout/Layout';
-import { HomeView } from 'views/HomeView';
-import { AuthorsView } from 'views/AuthorsView';
-import { AuthorSubView } from 'views/AuthorSubView';
-import { BooksView } from 'views/BooksView';
-import { BookDetailsView } from 'views/BookDetailsView';
-import { NotFoundView } from 'views/NotFoundView';
+import { createAsyncView } from 'helpers';
+
+const HomeView = createAsyncView('HomeView');
+const AuthorsView = createAsyncView('AuthorsView');
+const AuthorSubView = createAsyncView('AuthorSubView');
+const BooksView = createAsyncView('BooksView');
+const BookDetailsView = createAsyncView('BookDetailsView');
+const NotFoundView = createAsyncView('NotFoundView');
 
 export const App = () => {
   return (
