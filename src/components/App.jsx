@@ -1,26 +1,32 @@
-import { Routes, Route } from 'react-router-dom';
-import { Layout } from 'components/Layout/Layout';
-import { createAsyncView } from 'helpers';
-
-const HomeView = createAsyncView('HomeView');
-const AuthorsView = createAsyncView('AuthorsView');
-const AuthorSubView = createAsyncView('AuthorSubView');
-const BooksView = createAsyncView('BooksView');
-const BookDetailsView = createAsyncView('BookDetailsView');
-const NotFoundView = createAsyncView('NotFoundView');
+import { useState } from 'react';
+import { Form } from './Form';
 
 export const App = () => {
+  const [user, setUser] = useState('guest');
+  const [isEditing, setIsEditing] = useState(false);
+
+  const handleEdit = newUsername => {
+    setUser(newUsername);
+    setIsEditing(false);
+  };
+
   return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<HomeView />} />
-        <Route path="authors" element={<AuthorsView />}>
-          <Route path=":authorId" element={<AuthorSubView />} />
-        </Route>
-        <Route path="books" element={<BooksView />} />
-        <Route path="books/:bookId" element={<BookDetailsView />} />
-        <Route path="*" element={<NotFoundView />} />
-      </Route>
-    </Routes>
+    <div>
+      <h2>Create new user</h2>
+      <Form onSubmit={setUser} />
+      <div>
+        {isEditing ? (
+          <>
+            <h2>Edit this user</h2>
+            <Form onSubmit={handleEdit} initialValue={user} />
+          </>
+        ) : (
+          <>
+            <p>Username: {user}</p>
+            <button onClick={() => setIsEditing(true)}>Edit</button>
+          </>
+        )}
+      </div>
+    </div>
   );
 };
